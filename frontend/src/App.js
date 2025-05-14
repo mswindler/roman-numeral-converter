@@ -10,6 +10,7 @@ function App() {
     window.matchMedia('(prefers-color-scheme: dark)').matches
   );
 
+  // useEffect to update the color scheme when the user's system theme changes
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e) => {

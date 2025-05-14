@@ -9,6 +9,7 @@ function convertToRoman(num) {
         throw new Error('Number must be an integer between 1 and 3999');
     }
 
+    // https://en.wikipedia.org/wiki/Roman_numerals
     const romanNumerals = [
         { value: 1000, symbol: 'M' },
         { value: 900, symbol: 'CM' },
@@ -29,9 +30,9 @@ function convertToRoman(num) {
     let remaining = num;
 
     for (const { value, symbol } of romanNumerals) {
-        while (remaining >= value) {
-            result += symbol;
-            remaining -= value;
+        while (remaining >= value) { // while the remaining number is greater than the value of the current numeral
+            result += symbol; // add the symbol to the result
+            remaining -= value; // subtract the value from the remaining number
         }
     }
 

@@ -47,7 +47,7 @@ function RomanNumeralConverter() {
   };
 
   return (
-    <View padding="size-1000">
+    <View padding="size-1000"> {/* Using Adobe Spectrum View component */}
       <Flex direction="column" gap="size-200">
         <Heading level={1}>Roman Numeral Converter</Heading>
         
@@ -57,7 +57,7 @@ function RomanNumeralConverter() {
               label="Enter a number (1-3999)"
               type="number"
               value={inputValue}
-              onChange={handleInputChange}
+              onChange={handleInputChange} 
               min={1}
               max={3999}
               width="100%"
