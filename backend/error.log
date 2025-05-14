@@ -1,0 +1,2 @@
+{"error":"Query parameter is required","level":"error","message":"Conversion failed","service":"roman-numeral-service","timestamp":"2025-05-14T18:45:33.982Z"}
+{"error":"Number must be an integer between 1 and 3999","level":"error","message":"Conversion failed","query":"10843","service":"roman-numeral-service","timestamp":"2025-05-14T18:47:13.459Z"}

@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.backend
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+      - OTLP_ENDPOINT=http://jaeger:4318/v1/traces
+    depends_on:
+      - jaeger
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  # Jaeger for distributed tracing
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"  # Web UI
+      - "4318:4318"    # OTLP HTTP receiver
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+
+  # Prometheus for metrics
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./docker/prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - backend 
