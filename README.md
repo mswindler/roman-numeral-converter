@@ -36,9 +36,31 @@ A full-stack web application that converts integers to Roman numerals, built wit
 - Docker
 - Docker Compose
 
-## Getting Started
+## Quick Start with Docker
 
-### Development Mode
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mswindler/roman-numeral-converter.git
+   cd roman-numeral-converter
+   ```
+
+2. Build and start all services:
+   ```bash
+   docker-compose up --build
+   ```
+
+3. Access the application components:
+   - Frontend UI: http://localhost:3000
+   - Backend API: http://localhost:8080/romannumeral?query={number}
+   - Jaeger UI (Tracing): http://localhost:16686
+   - Prometheus UI (Metrics): http://localhost:9090
+
+4. To stop the application:
+   ```bash
+   docker-compose down
+   ```
+
+## Development Mode (Without Docker)
 
 1. Start the backend:
    ```bash
@@ -57,33 +79,6 @@ A full-stack web application that converts integers to Roman numerals, built wit
 3. Access the application:
    - Frontend: http://localhost:3000
    - Backend API: http://localhost:8080
-
-### Docker Deployment
-
-1. Build and start all services:
-   ```bash
-   docker-compose up --build
-   ```
-
-2. Access the application components:
-   - Frontend UI: http://localhost:3000
-   - Backend API: http://localhost:8080/romannumeral?query={number}
-   - Jaeger UI (Tracing): http://localhost:16686
-   - Prometheus UI (Metrics): http://localhost:9090
-
-### Running Tests
-
-1. Backend tests:
-   ```bash
-   cd backend
-   npm test
-   ```
-
-2. Frontend tests:
-   ```bash
-   cd frontend
-   npm test
-   ```
 
 ## API Documentation
 
