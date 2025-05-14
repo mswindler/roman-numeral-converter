@@ -130,25 +130,62 @@ The application implements the three pillars of observability:
 
 ## Development
 
-### Project Structure
+### Project Organization
 ```
 roman-numeral-converter/
-├── frontend/           # React frontend application
-│   ├── src/
-│   │   ├── components/
-│   │   └── App.js
-│   └── package.json
-├── backend/           # Node.js backend service
-│   ├── middleware/    # Observability middleware
-│   ├── routes/       # API routes
-│   ├── utils/        # Conversion logic
-│   └── tests/        # Test files
-├── docker/           # Docker configuration
-│   ├── Dockerfile.frontend
-│   ├── Dockerfile.backend
-│   └── prometheus.yml
-└── docker-compose.yml
+├── frontend/                 # React frontend application
+│   ├── src/                 # Source code
+│   │   ├── components/      # React components
+│   │   │   ├── RomanNumeralConverter.js  # Main converter component
+│   │   │   └── ErrorBoundary.js          # Error handling
+│   │   └── App.js          # Application entry point
+│   ├── cypress/            # End-to-end tests
+│   │   ├── e2e/           # Test specifications
+│   │   └── support/       # Test helpers
+│   ├── public/            # Static assets
+│   └── package.json       # Frontend dependencies
+│
+├── backend/               # Node.js backend service
+│   ├── middleware/       # Express middleware
+│   │   ├── logging.js    # Winston logger setup
+│   │   ├── metrics.js    # Prometheus metrics
+│   │   └── tracing.js    # OpenTelemetry configuration
+│   ├── routes/          # API endpoints
+│   │   └── converter.js  # Roman numeral conversion route
+│   ├── utils/           # Utility functions
+│   │   └── romanNumeralConverter.js  # Core conversion logic
+│   ├── tests/          # Unit and integration tests
+│   └── package.json    # Backend dependencies
+│
+├── docker/             # Docker configuration
+│   ├── Dockerfile.frontend  # Frontend container definition
+│   ├── Dockerfile.backend   # Backend container definition
+│   └── prometheus.yml      # Prometheus configuration
+│
+├── docker-compose.yml  # Service orchestration
+├── DEPENDENCIES.md    # Dependency documentation
+└── README.md         # Project documentation
 ```
+
+### Key Architectural Decisions
+
+1. **Service Separation**: Frontend and backend are separate services to allow independent scaling and deployment.
+
+2. **Observability First**: Each component includes built-in support for:
+   - Logging (Winston)
+   - Metrics (Prometheus)
+   - Tracing (OpenTelemetry)
+
+3. **Testing Strategy**:
+   - Backend: Unit tests with Jest, API tests with Supertest
+   - Frontend: Component tests with React Testing Library, E2E with Cypress
+
+4. **Container-Ready**: Docker configuration for both development and production environments
+
+5. **Developer Experience**:
+   - Hot reloading for both services
+   - Comprehensive documentation
+   - Consistent code style and structure
 
 ### Making Changes
 
