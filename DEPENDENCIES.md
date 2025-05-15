@@ -61,19 +61,14 @@ This document explains the key dependencies used in this project and the reasoni
   - Enterprise-grade reliability
   - Excellent TypeScript support
 
-### State Management & Data Fetching
-
-- **@tanstack/react-query (^5.76.1)**
-  - Efficient server state management
-  - Built-in caching and revalidation
-  - Reduces boilerplate for data fetching
-  - Superior developer experience with devtools
+### Data Fetching
 
 - **axios (^1.9.0)**
   - Feature-rich HTTP client
   - Interceptors for request/response handling
   - Better error handling than fetch API
   - Consistent browser support
+  - Simple integration with React's built-in state management
 
 ### Testing
 

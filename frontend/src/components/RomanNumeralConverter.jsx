@@ -10,7 +10,6 @@ import {
   ProgressCircle,
   StatusLight
 } from '@adobe/react-spectrum';
-import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 const API_URL = 'http://localhost:8080';
@@ -18,31 +17,37 @@ const API_URL = 'http://localhost:8080';
 function RomanNumeralConverter() {
   const [inputValue, setInputValue] = useState('');
   const [isValid, setIsValid] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [result, setResult] = useState(null);
 
-  const { data, error, isLoading, refetch, isFetching } = useQuery({
-    queryKey: ['romanNumeral', inputValue],
-    queryFn: async () => {
-      if (!inputValue) return null;
-      const response = await axios.get(`${API_URL}/romannumeral?query=${inputValue}`);
-      return response.data;
-    },
-    enabled: false,
-    retry: false
-  });
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    
     if (inputValue >= 1 && inputValue <= 3999) {
       setIsValid(true);
-      refetch();
+      setError(null);
+      setIsLoading(true);
+      
+      try {
+        const response = await axios.get(`${API_URL}/romannumeral?query=${inputValue}`);
+        setResult(response.data);
+      } catch (err) {
+        setError(err);
+        setResult(null);
+      } finally {
+        setIsLoading(false);
+      }
     } else {
       setIsValid(false);
+      setResult(null);
     }
   };
 
   const handleInputChange = (value) => {
     setInputValue(value);
     setIsValid(true);
+    setError(null);
   };
 
   return (
@@ -70,7 +75,7 @@ function RomanNumeralConverter() {
             <Button
               variant="cta"
               type="submit"
-              isDisabled={isFetching}
+              isDisabled={isLoading}
             >
               Convert to Roman Numeral
             </Button>
@@ -78,16 +83,16 @@ function RomanNumeralConverter() {
         </Form>
 
         <View marginTop="size-200">
-          {isLoading || isFetching ? (
+          {isLoading ? (
             <ProgressCircle aria-label="Converting..." isIndeterminate />
           ) : error ? (
             <StatusLight variant="negative">
               Error: {error.response?.data || 'Something went wrong'}
             </StatusLight>
-          ) : data ? (
+          ) : result ? (
             <Flex direction="column" gap="size-100">
               <Text>Result:</Text>
-              <Heading level={2}>{data.output}</Heading>
+              <Heading level={2}>{result.output}</Heading>
             </Flex>
           ) : null}
         </View>

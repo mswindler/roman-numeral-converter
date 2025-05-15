@@ -7,7 +7,6 @@
     "@react-spectrum/theme-dark": "^3.5.17",
     "@react-spectrum/theme-default": "^3.5.17",
     "@spectrum-icons/workflow": "^4.2.20",
-    "@tanstack/react-query": "^5.76.1",
     "@testing-library/dom": "^9.3.4",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^14.2.1",
