@@ -10,9 +10,7 @@ import {
   ProgressCircle,
   StatusLight
 } from '@adobe/react-spectrum';
-import axios from 'axios';
-
-const API_URL = 'http://localhost:8080';
+import { convertToRomanNumeral } from '../utils/api';
 
 function RomanNumeralConverter() {
   const [inputValue, setInputValue] = useState('');
@@ -30,8 +28,8 @@ function RomanNumeralConverter() {
       setIsLoading(true);
       
       try {
-        const response = await axios.get(`${API_URL}/romannumeral?query=${inputValue}`);
-        setResult(response.data);
+        const data = await convertToRomanNumeral(inputValue);
+        setResult(data);
       } catch (err) {
         setError(err);
         setResult(null);
@@ -68,8 +66,10 @@ function RomanNumeralConverter() {
               validationState={isValid ? 'valid' : 'invalid'}
               errorMessage={!isValid && "Please enter a number between 1 and 3999"}
               formatOptions={{
-                useGrouping: false
+                useGrouping: false,
+                maximumFractionDigits: 0
               }}
+              step={1}
             />
             
             <Button
