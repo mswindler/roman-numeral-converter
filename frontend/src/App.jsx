@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Provider, defaultTheme, darkTheme } from '@adobe/react-spectrum';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import RomanNumeralConverter from './components/RomanNumeralConverter';
+import RomanNumeralConverter from './components/RomanNumeralConverter.jsx';
 
 const queryClient = new QueryClient();
 
