@@ -59,6 +59,7 @@ function RomanNumeralConverter() {
               minValue={1}
               maxValue={3999}
               width="100%"
+              isRequired
               validationState={isValid ? 'valid' : 'invalid'}
               errorMessage={!isValid && "Please enter a number between 1 and 3999"}
               formatOptions={{
@@ -69,7 +70,7 @@ function RomanNumeralConverter() {
             <Button
               variant="cta"
               type="submit"
-              isDisabled={!inputValue || isFetching}
+              isDisabled={isFetching}
             >
               Convert to Roman Numeral
             </Button>
