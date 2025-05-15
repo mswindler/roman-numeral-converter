@@ -3,7 +3,7 @@ import {
   View,
   Flex,
   Form,
-  TextField,
+  NumberField,
   Button,
   Text,
   Heading,
@@ -32,8 +32,7 @@ function RomanNumeralConverter() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const num = parseInt(inputValue, 10);
-    if (num >= 1 && num <= 3999) {
+    if (inputValue >= 1 && inputValue <= 3999) {
       setIsValid(true);
       refetch();
     } else {
@@ -47,22 +46,24 @@ function RomanNumeralConverter() {
   };
 
   return (
-    <View padding="size-1000"> {/* Using Adobe Spectrum View component */}
+    <View padding="size-1000">
       <Flex direction="column" gap="size-200">
         <Heading level={1}>Roman Numeral Converter</Heading>
         
         <Form onSubmit={handleSubmit} maxWidth="size-3000">
           <Flex direction="column" gap="size-200">
-            <TextField
+            <NumberField
               label="Enter a number (1-3999)"
-              type="number"
               value={inputValue}
-              onChange={handleInputChange} 
-              min={1}
-              max={3999}
+              onChange={handleInputChange}
+              minValue={1}
+              maxValue={3999}
               width="100%"
               validationState={isValid ? 'valid' : 'invalid'}
               errorMessage={!isValid && "Please enter a number between 1 and 3999"}
+              formatOptions={{
+                useGrouping: false
+              }}
             />
             
             <Button
